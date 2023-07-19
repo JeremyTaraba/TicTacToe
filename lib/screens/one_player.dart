@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/util/my_texts.dart';
-import 'package:tic_tac_toe/util/draw_board.dart';
 
 import '../util/my_stack.dart';
+import '../util/logic_functions.dart';
 
 class OnePlayerScreen extends StatefulWidget {
   const OnePlayerScreen({super.key});
@@ -16,27 +16,13 @@ class OnePlayerScreen extends StatefulWidget {
 
 class _OnePlayerScreenState extends State<OnePlayerScreen> {
   bool yourTurn = true;
-  String turnText = "Your";
-  var positions = List.filled(9, "", growable: false);
-  void markPosition(int index) {
-    print("marked position");
-    setState(() {
-      if (yourTurn) {
-        positions[index] = "X";
-      } else {
-        positions[index] = "O";
-      }
-      yourTurn = !yourTurn;
-    });
-  }
+  var positions = List.filled(9, " ", growable: false);
+  var availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
+  String turnText = "X's";
 
   @override
   Widget build(BuildContext context) {
-    bool yourTurn = true;
-    var positions = List.filled(9, " ", growable: false);
-    var availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
-    var order = MyStack<int>();
-
+    //variables in here get rebuilt everytime setstate is called
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
@@ -75,20 +61,113 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                         return GestureDetector(
                           onTap: () {
                             print("$index clicked");
+                            if (checkPosition(index, availablePositions)) {
+                              setState(() {
+                                availablePositions.remove(index);
+                                positions[index] = positionText(yourTurn);
+                                yourTurn = !yourTurn;
+                                turnText = yourTurn ? "X's" : "O's";
+                                if (checkWinner(positions).isNotEmpty) {
+                                  showDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Center(
+                                            child: Text(
+                                                "${yourTurn ? "O" : "X"} Wins"),
+                                          ),
+                                          actions: [
+                                            Center(
+                                              child: TextButton(
+                                                child: const Text("Play Again"),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    clearBoard(positions);
+                                                  });
+                                                  availablePositions = <int>{
+                                                    0,
+                                                    1,
+                                                    2,
+                                                    3,
+                                                    4,
+                                                    5,
+                                                    6,
+                                                    7,
+                                                    8
+                                                  };
+                                                  turnText = "X's";
+                                                  yourTurn = true;
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        );
+                                      });
+
+                                  checkWinner(positions).forEach((element) {
+                                    if (positions[element] == "O") {
+                                      positions[element] = "o";
+                                    } else {
+                                      positions[element] = "x";
+                                    }
+                                  });
+                                }
+                                if (availablePositions.isEmpty) {
+                                  showDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Center(
+                                            child: Text("Tie Game"),
+                                          ),
+                                          actions: [
+                                            Center(
+                                              child: TextButton(
+                                                child: const Text("Play Again"),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    clearBoard(positions);
+                                                  });
+                                                  availablePositions = <int>{
+                                                    0,
+                                                    1,
+                                                    2,
+                                                    3,
+                                                    4,
+                                                    5,
+                                                    6,
+                                                    7,
+                                                    8
+                                                  };
+                                                  turnText = "X's";
+                                                  yourTurn = true;
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        );
+                                      });
+                                }
+                              });
+                            }
                           },
                           child: Container(
                             padding: EdgeInsets.only(left: 10),
+                            margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(25),
                               border: Border.all(
-                                color: Colors.black,
+                                color: Colors.white,
                                 width: 10,
                               ),
                             ),
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: TicTacText("O"),
+                              child: TicTacText(positions[index]),
                             ),
                           ),
                         );

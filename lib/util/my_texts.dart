@@ -35,7 +35,7 @@ Widget TicTacText(String text) {
   return Text(
     text,
     style: TextStyle(
-      color: Colors.pink,
+      color: text == "X" || text == "x" ? Colors.pink : Colors.blue,
       fontFamily: "PublicPixel",
     ),
   );

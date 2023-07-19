@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8),
                   child: myTextButton(
                     text: "2 Players",
-                    color: Colors.red,
+                    color: Colors.pink,
                     pressed: () {
                       Navigator.push(
                         context,
