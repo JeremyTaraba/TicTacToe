@@ -30,3 +30,13 @@ Widget BorderText(
                 color: borderColor),
           ]));
 }
+
+Widget TicTacText(String text) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: Colors.pink,
+      fontFamily: "PublicPixel",
+    ),
+  );
+}

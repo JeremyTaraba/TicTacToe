@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/screens/one_player.dart';
 import 'package:tic_tac_toe/screens/two_player.dart';
-import 'package:tic_tac_toe/util/border_text.dart';
+import 'package:tic_tac_toe/util/my_texts.dart';
 import 'package:tic_tac_toe/util/draw_board.dart';
 import 'package:tic_tac_toe/util/my_text_button.dart';
 import 'package:tic_tac_toe/util/rounded_divider.dart';

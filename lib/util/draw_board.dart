@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/util/rounded_Divider.dart';
 import '../util/my_stack.dart';
-import 'border_text.dart';
+import 'my_texts.dart';
 
 class DrawBoard extends StatefulWidget {
   const DrawBoard({super.key});
@@ -60,204 +60,204 @@ class _DrawBoardState extends State<DrawBoard> {
               child: roundedDivider(width: widthTenPercent * 8),
             ),
           ),
-          Positioned(
-            left: column1x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(0, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(0);
-                    order.push(0);
-                    positions[0] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[0], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            left: column2x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(1, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(1);
-                    order.push(1);
-                    positions[1] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[1], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            left: column3x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(2, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(2);
-                    order.push(2);
-                    positions[2] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[2], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: row2y,
-            left: column1x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(3, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(3);
-                    order.push(3);
-                    positions[3] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[3], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: row2y,
-            left: column2x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(4, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(4);
-                    order.push(4);
-                    positions[4] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[4], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: row2y,
-            left: column3x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(5, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(5);
-                    order.push(5);
-                    positions[5] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[5], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: row3y,
-            left: column1x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(6, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(6);
-                    order.push(6);
-                    positions[6] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[6], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: row3y,
-            left: column2x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(7, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(7);
-                    order.push(7);
-                    positions[7] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[7], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: row3y,
-            left: column3x,
-            child: TextButton(
-              onPressed: () {
-                if (checkPosition(8, availablePositions)) {
-                  setState(() {
-                    availablePositions.remove(8);
-                    order.push(8);
-                    positions[8] = positionText(yourTurn);
-                    yourTurn = !yourTurn;
-                    if (checkWinner(positions)) {
-                      print("winner");
-                    }
-                  });
-                }
-              },
-              child: textColorController(positions[8], widthTenPercent * 2),
-            ),
-          ),
-          Positioned(
-            top: heightTenPercent * 4.5,
-            left: widthTenPercent * 2.5,
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  int? undo = order.pop();
-                  if (undo is int) {
-                    positions[undo] = " ";
-                    availablePositions.add(undo);
-                    yourTurn = !yourTurn;
-                  }
-                });
-              },
-              child: BorderText(
-                text: "Undo",
-                color: Colors.white,
-                size: 58,
-              ),
-            ),
-          )
+          // Positioned(
+          //   left: column1x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(0, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(0);
+          //           order.push(0);
+          //           positions[0] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[0], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   left: column2x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(1, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(1);
+          //           order.push(1);
+          //           positions[1] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[1], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   left: column3x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(2, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(2);
+          //           order.push(2);
+          //           positions[2] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[2], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: row2y,
+          //   left: column1x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(3, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(3);
+          //           order.push(3);
+          //           positions[3] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[3], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: row2y,
+          //   left: column2x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(4, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(4);
+          //           order.push(4);
+          //           positions[4] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[4], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: row2y,
+          //   left: column3x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(5, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(5);
+          //           order.push(5);
+          //           positions[5] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[5], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: row3y,
+          //   left: column1x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(6, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(6);
+          //           order.push(6);
+          //           positions[6] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[6], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: row3y,
+          //   left: column2x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(7, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(7);
+          //           order.push(7);
+          //           positions[7] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[7], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: row3y,
+          //   left: column3x,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       if (checkPosition(8, availablePositions)) {
+          //         setState(() {
+          //           availablePositions.remove(8);
+          //           order.push(8);
+          //           positions[8] = positionText(yourTurn);
+          //           yourTurn = !yourTurn;
+          //           if (checkWinner(positions)) {
+          //             print("winner");
+          //           }
+          //         });
+          //       }
+          //     },
+          //     child: textColorController(positions[8], widthTenPercent * 2),
+          //   ),
+          // ),
+          // Positioned(
+          //   top: heightTenPercent * 4.5,
+          //   left: widthTenPercent * 2.5,
+          //   child: TextButton(
+          //     onPressed: () {
+          //       setState(() {
+          //         int? undo = order.pop();
+          //         if (undo is int) {
+          //           positions[undo] = " ";
+          //           availablePositions.add(undo);
+          //           yourTurn = !yourTurn;
+          //         }
+          //       });
+          //     },
+          //     child: BorderText(
+          //       text: "Undo",
+          //       color: Colors.white,
+          //       size: 58,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

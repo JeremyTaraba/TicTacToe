@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/util/draw_board.dart';
 
-import '../util/border_text.dart';
+import '../util/my_texts.dart';
 
 class TwoPlayerScreen extends StatelessWidget {
   const TwoPlayerScreen({super.key});
