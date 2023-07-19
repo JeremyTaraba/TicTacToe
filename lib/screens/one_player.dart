@@ -33,30 +33,26 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
       ),
       child: SafeArea(
         child: Scaffold(
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/default.png"), fit: BoxFit.fill),
-            ),
-            child: Column(
-              children: [
-                BorderText(text: "$turnText \n turn", size: 54),
-                SizedBox(
-                  height: 100,
+          body: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/default.png"),
+                      fit: BoxFit.cover),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      yourTurn = !yourTurn;
-                      print("changing turn");
-                    });
-                  },
-                  child: DrawBoard(),
-                ),
-              ],
-            ),
+              ),
+              Column(
+                children: [
+                  SizedBox(height: 25, width: 0),
+                  BorderText(text: "$turnText \n turn", size: 54),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  DrawBoard(),
+                ],
+              ),
+            ],
           ),
         ),
       ),
