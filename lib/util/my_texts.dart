@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget BorderText(
+Widget borderText(
     {text = "",
     borderColor = Colors.white,
     double width = 1.5,
@@ -31,14 +31,12 @@ Widget BorderText(
           ]));
 }
 
-Widget TicTacText(String text, Color color) {
-  return Container(
-    child: Text(
-      text,
-      style: TextStyle(
-        color: color,
-        fontFamily: "PublicPixel",
-      ),
+Widget ticTacText(String text, Color color) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: color,
+      fontFamily: "PublicPixel",
     ),
   );
 }

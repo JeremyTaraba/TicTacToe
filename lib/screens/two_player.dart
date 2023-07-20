@@ -19,7 +19,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //variables in here get rebuilt everytime setstate is called
+    //variables in here get rebuilt everytime set state is called
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
@@ -41,7 +41,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                     flex: 1,
                     child: FittedBox(
                       fit: BoxFit.fill,
-                      child: BorderText(text: "$turnText \n turn"),
+                      child: borderText(text: "$turnText \n turn"),
                     ),
                   ),
                   Expanded(
@@ -52,8 +52,9 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                     flex: 5,
                     child: GridView.builder(
                       itemCount: 9,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
@@ -79,8 +80,8 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.only(left: 10),
-                            margin: EdgeInsets.all(5),
+                            padding: const EdgeInsets.only(left: 10),
+                            margin: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
                               border: Border.all(
@@ -90,7 +91,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                             ),
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: TicTacText(
+                              child: ticTacText(
                                   positions[index], colorList[index]),
                             ),
                           ),
@@ -125,7 +126,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                             turnText = "X's";
                             yourTurn = true;
                           },
-                          child: BorderText(text: "play again")),
+                          child: borderText(text: "play again")),
                     )
                   ],
                 ],

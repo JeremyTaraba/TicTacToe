@@ -12,21 +12,21 @@ class OnePlayerScreen extends StatefulWidget {
   State<OnePlayerScreen> createState() => _OnePlayerScreenState();
 }
 
-// use a container for the tic tac toe board instead of textbuttons because the clickable area of text buttons depends on the text
+// use a container for the tic tac toe board instead of text buttons because the clickable area of text buttons depends on the text
 // but the clickable area for container with a text child will always be the size of the container
 
 class _OnePlayerScreenState extends State<OnePlayerScreen> {
   bool yourTurn = true;
   var positions = List.filled(9, " ", growable: false);
   var availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
-  String turnText = "vs AI";
+
   var aiTurn = 0;
   var colorList = List.filled(9, Colors.pink, growable: false);
   final _random = Random();
 
   @override
   Widget build(BuildContext context) {
-    //variables in here get rebuilt everytime setstate is called
+    //variables in here get rebuilt everytime set state is called
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
@@ -48,7 +48,7 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                     flex: 1,
                     child: FittedBox(
                       fit: BoxFit.fill,
-                      child: BorderText(text: turnText),
+                      child: borderText(text: "vs \n AI"),
                     ),
                   ),
                   Expanded(
@@ -59,8 +59,9 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                     flex: 5,
                     child: GridView.builder(
                       itemCount: 9,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
@@ -114,8 +115,8 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.only(left: 10),
-                            margin: EdgeInsets.all(5),
+                            padding: const EdgeInsets.only(left: 10),
+                            margin: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
                               border: Border.all(
@@ -125,7 +126,7 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                             ),
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: TicTacText(
+                              child: ticTacText(
                                   positions[index], colorList[index]),
                             ),
                           ),

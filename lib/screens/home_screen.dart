@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/screens/one_player.dart';
 import 'package:tic_tac_toe/screens/two_player.dart';
 import 'package:tic_tac_toe/util/my_texts.dart';
-import 'package:tic_tac_toe/util/draw_board.dart';
 import 'package:tic_tac_toe/util/my_text_button.dart';
 import 'package:tic_tac_toe/util/rounded_divider.dart';
 
@@ -31,15 +30,15 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 8, right: 150),
-                  child: BorderText(
+                  padding: const EdgeInsets.only(top: 8, right: 150),
+                  child: borderText(
                     text: "Tic",
                     borderColor: Colors.blue,
                     color: Colors.purple,
                     size: 120,
                   ),
                 ),
-                BorderText(
+                borderText(
                   text: "Tac",
                   borderColor: Colors.blue,
                   color: Colors.purple,
@@ -47,8 +46,8 @@ class HomePage extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(bottom: 18, left: 100),
-                  child: BorderText(
+                  padding: const EdgeInsets.only(bottom: 18, left: 100),
+                  child: borderText(
                     text: "Toe",
                     borderColor: Colors.blue,
                     color: Colors.purple,
