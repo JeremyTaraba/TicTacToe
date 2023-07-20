@@ -104,27 +104,14 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
               Column(
                 verticalDirection: VerticalDirection.up,
                 children: [
-                  if (checkWinner(positions).isNotEmpty) ...[
+                  if (checkWinner(positions).isNotEmpty ||
+                      (availablePositions.isEmpty &&
+                          checkWinner(positions).isEmpty)) ...[
                     Center(
                       heightFactor: 3,
                       child: GestureDetector(
                           onTap: () {
-                            setState(() {
-                              clearBoard(positions);
-                            });
-                            availablePositions = <int>{
-                              0,
-                              1,
-                              2,
-                              3,
-                              4,
-                              5,
-                              6,
-                              7,
-                              8
-                            };
-                            turnText = "X's";
-                            yourTurn = true;
+                            resetBoard();
                           },
                           child: borderText(text: "play again")),
                     )
@@ -136,6 +123,15 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
         ),
       ),
     );
+  }
+
+  void resetBoard() {
+    setState(() {
+      clearBoard(positions);
+    });
+    availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
+    turnText = "X's";
+    yourTurn = true;
   }
 
   void showWinDialog() {
@@ -152,12 +148,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                 child: TextButton(
                   child: const Text("Play Again"),
                   onPressed: () {
-                    setState(() {
-                      clearBoard(positions);
-                    });
-                    availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
-                    turnText = "X's";
-                    yourTurn = true;
+                    resetBoard();
                     Navigator.of(context).pop();
                   },
                 ),
@@ -181,12 +172,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                 child: TextButton(
                   child: const Text("Play Again"),
                   onPressed: () {
-                    setState(() {
-                      clearBoard(positions);
-                    });
-                    availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
-                    turnText = "X's";
-                    yourTurn = true;
+                    resetBoard();
                     Navigator.of(context).pop();
                   },
                 ),
