@@ -66,86 +66,14 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                                 yourTurn = !yourTurn;
                                 turnText = yourTurn ? "X's" : "O's";
                                 if (checkWinner(positions).isNotEmpty) {
-                                  showDialog(
-                                      barrierDismissible: true,
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Center(
-                                            child: Text(
-                                                "${yourTurn ? "O" : "X"} Wins"),
-                                          ),
-                                          actions: [
-                                            Center(
-                                              child: TextButton(
-                                                child: const Text("Play Again"),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    clearBoard(positions);
-                                                  });
-                                                  availablePositions = <int>{
-                                                    0,
-                                                    1,
-                                                    2,
-                                                    3,
-                                                    4,
-                                                    5,
-                                                    6,
-                                                    7,
-                                                    8
-                                                  };
-                                                  turnText = "X's";
-                                                  yourTurn = true;
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        );
-                                      });
-
                                   checkWinner(positions).forEach((element) {
                                     colorList[element] = Colors.green;
                                   });
+                                  showWinDialog();
                                 }
                                 if (availablePositions.isEmpty &&
                                     checkWinner(positions).isEmpty) {
-                                  showDialog(
-                                      barrierDismissible: true,
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Center(
-                                            child: Text("Tie Game"),
-                                          ),
-                                          actions: [
-                                            Center(
-                                              child: TextButton(
-                                                child: const Text("Play Again"),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    clearBoard(positions);
-                                                  });
-                                                  availablePositions = <int>{
-                                                    0,
-                                                    1,
-                                                    2,
-                                                    3,
-                                                    4,
-                                                    5,
-                                                    6,
-                                                    7,
-                                                    8
-                                                  };
-                                                  turnText = "X's";
-                                                  yourTurn = true;
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        );
-                                      });
+                                  showTieDialog();
                                 }
                               });
                             }
@@ -207,5 +135,63 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
         ),
       ),
     );
+  }
+
+  void showWinDialog() {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Center(
+              child: Text("${yourTurn ? "O" : "X"} Wins"),
+            ),
+            actions: [
+              Center(
+                child: TextButton(
+                  child: const Text("Play Again"),
+                  onPressed: () {
+                    setState(() {
+                      clearBoard(positions);
+                    });
+                    availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
+                    turnText = "X's";
+                    yourTurn = true;
+                    Navigator.of(context).pop();
+                  },
+                ),
+              )
+            ],
+          );
+        });
+  }
+
+  void showTieDialog() {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child: Text("Tie Game"),
+            ),
+            actions: [
+              Center(
+                child: TextButton(
+                  child: const Text("Play Again"),
+                  onPressed: () {
+                    setState(() {
+                      clearBoard(positions);
+                    });
+                    availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
+                    turnText = "X's";
+                    yourTurn = true;
+                    Navigator.of(context).pop();
+                  },
+                ),
+              )
+            ],
+          );
+        });
   }
 }
