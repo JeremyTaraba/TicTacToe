@@ -31,12 +31,14 @@ Widget BorderText(
           ]));
 }
 
-Widget TicTacText(String text) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: text == "X" || text == "x" ? Colors.pink : Colors.blue,
-      fontFamily: "PublicPixel",
+Widget TicTacText(String text, Color color) {
+  return Container(
+    child: Text(
+      text,
+      style: TextStyle(
+        color: color,
+        fontFamily: "PublicPixel",
+      ),
     ),
   );
 }

@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/util/my_texts.dart';
 
-import '../util/my_stack.dart';
 import '../util/logic_functions.dart';
 
 class OnePlayerScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
   var positions = List.filled(9, " ", growable: false);
   var availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
   String turnText = "X's";
+  var colorList = List.filled(9, Colors.pink, growable: false);
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +62,21 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
-                            print("$index clicked");
                             if (checkPosition(index, availablePositions)) {
                               setState(() {
                                 availablePositions.remove(index);
                                 positions[index] = positionText(yourTurn);
+                                colorList[index] =
+                                    yourTurn ? Colors.pink : Colors.blue;
                                 yourTurn = !yourTurn;
                                 turnText = yourTurn ? "X's" : "O's";
                                 if (checkWinner(positions).isNotEmpty) {
+                                  checkWinner(positions).forEach((element) {
+                                    setState(() {
+                                      colorList[element] = Colors.green;
+                                    });
+                                  });
+
                                   showDialog(
                                       barrierDismissible: false,
                                       context: context,
@@ -105,16 +114,9 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                                           ],
                                         );
                                       });
-
-                                  checkWinner(positions).forEach((element) {
-                                    if (positions[element] == "O") {
-                                      positions[element] = "o";
-                                    } else {
-                                      positions[element] = "x";
-                                    }
-                                  });
                                 }
-                                if (availablePositions.isEmpty) {
+                                if (availablePositions.isEmpty &&
+                                    checkWinner(positions).isEmpty) {
                                   showDialog(
                                       barrierDismissible: false,
                                       context: context,
@@ -167,7 +169,8 @@ class _OnePlayerScreenState extends State<OnePlayerScreen> {
                             ),
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: TicTacText(positions[index]),
+                              child: TicTacText(
+                                  positions[index], colorList[index]),
                             ),
                           ),
                         );

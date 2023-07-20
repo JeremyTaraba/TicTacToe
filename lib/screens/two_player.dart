@@ -14,6 +14,7 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
   bool yourTurn = true;
   var positions = List.filled(9, " ", growable: false);
   var availablePositions = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8};
+  var colorList = List.filled(9, Colors.pink, growable: false);
   String turnText = "X's";
 
   @override
@@ -56,16 +57,17 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
-                            print("$index clicked");
                             if (checkPosition(index, availablePositions)) {
                               setState(() {
                                 availablePositions.remove(index);
+                                colorList[index] =
+                                    yourTurn ? Colors.pink : Colors.blue;
                                 positions[index] = positionText(yourTurn);
                                 yourTurn = !yourTurn;
                                 turnText = yourTurn ? "X's" : "O's";
                                 if (checkWinner(positions).isNotEmpty) {
                                   showDialog(
-                                      barrierDismissible: false,
+                                      barrierDismissible: true,
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
@@ -103,16 +105,13 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                                       });
 
                                   checkWinner(positions).forEach((element) {
-                                    if (positions[element] == "O") {
-                                      positions[element] = "o";
-                                    } else {
-                                      positions[element] = "x";
-                                    }
+                                    colorList[element] = Colors.green;
                                   });
                                 }
-                                if (availablePositions.isEmpty) {
+                                if (availablePositions.isEmpty &&
+                                    checkWinner(positions).isEmpty) {
                                   showDialog(
-                                      barrierDismissible: false,
+                                      barrierDismissible: true,
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
@@ -163,13 +162,44 @@ class _TwoPlayerScreenState extends State<TwoPlayerScreen> {
                             ),
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: TicTacText(positions[index]),
+                              child: TicTacText(
+                                  positions[index], colorList[index]),
                             ),
                           ),
                         );
                       },
                     ),
                   )
+                ],
+              ),
+              Column(
+                verticalDirection: VerticalDirection.up,
+                children: [
+                  if (checkWinner(positions).isNotEmpty) ...[
+                    Center(
+                      heightFactor: 3,
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              clearBoard(positions);
+                            });
+                            availablePositions = <int>{
+                              0,
+                              1,
+                              2,
+                              3,
+                              4,
+                              5,
+                              6,
+                              7,
+                              8
+                            };
+                            turnText = "X's";
+                            yourTurn = true;
+                          },
+                          child: BorderText(text: "play again")),
+                    )
+                  ],
                 ],
               ),
             ],
