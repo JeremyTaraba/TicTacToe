@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                   child: borderText(
                     text: "Tic",
                     borderColor: Colors.blue,
-                    color: Colors.white,
+                    color: Colors.purple,
                     size: 120,
                   ),
                 ),
